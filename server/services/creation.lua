@@ -39,7 +39,7 @@ RegisterServerEvent("bcc-society:InsertSocietyToDB", function(name, ownerCharId,
                 if #employedAtSocieties > 0 then
                     Core.NotifyRightTip(_source, _U("alreadyEmployed"), 4000)
                 else
-                    MySQL.query.await("INSERT INTO bcc_society (business_name, owner_id, tax_amount, inv_limit, coords, blip_hash, inventory_upgrade_stages, society_job, maxJobGrade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", { name, ownerCharId, taxAmount, invLimit, json.encode(coords), blipHash, stages, societyJob, maxJobGrade })
+                    MySQL.query.await("INSERT INTO bcc_society (business_name, owner_id, tax_amount, inv_limit, coords, blip_hash, inventory_upgrade_stages, society_job, max_job_grade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", { name, ownerCharId, taxAmount, invLimit, json.encode(coords), blipHash, stages, societyJob, maxJobGrade })
                     Core.NotifyRightTip(_source, _U("societyCreated"), 4000)
                     local retval = MySQL.query.await("SELECT * FROM bcc_society WHERE owner_id = ? AND business_name = ?", { ownerCharId, tostring(name) })
                     if #retval > 0 then
